@@ -1,4 +1,4 @@
-#+TITLE: agrant dev linux box with standard packages provisioned by Puppet   
+#+TITLE: vagrant dev linux box
 #+AUTHOR:   Roman Shestakov
 #+LANGUAGE: en
 
