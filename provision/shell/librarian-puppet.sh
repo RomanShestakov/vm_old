@@ -21,7 +21,8 @@ PATH=$PATH:/usr/local/bin/
 # Directory in which librarian-puppet should manage its modules directory
 PUPPET_DIR=/etc/puppet/
 PUPPET_SOURCE_DIR="$1"
-echo "$1"
+echo PUPPET_SOURCE_DIR: "$1"
+echo PUPPET_DIR: ${PUPPET_DIR}
 
 $(which git > /dev/null 2>&1)
 FOUND_GIT=$?
@@ -122,6 +123,12 @@ fi
 if [ ! -d "$PUPPET_DIR" ]; then
   mkdir -p $PUPPET_DIR
 fi
-#cp /vagrant/provision/puppet/Puppetfile $PUPPET_DIR
+
+echo "Running librarian-puppet version: $(librarian-puppet version)"
+echo "Copying ${PUPPET_SOURCE_DIR}/modules into ${PUPPET_DIR}"
 cp ${PUPPET_SOURCE_DIR}/Puppetfile $PUPPET_DIR
+cp -r ${PUPPET_SOURCE_DIR}/modules $PUPPET_DIR/.
 cd $PUPPET_DIR && librarian-puppet install
+
+
+

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#array=( 'github.com' )
 HOST=$1
 USERNAME=$2
 

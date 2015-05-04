@@ -13,7 +13,7 @@ forge "https://forgeapi.puppetlabs.com"
 # mod "maestrodev/wget"
 # mod "garethr/erlang"
 # mod "camptocamp/archive"
-# mod "puppetlabs/vcsrepo"
+mod 'puppetlabs-vcsrepo'
 # mod "tracywebtech/supervisor" 
 # mod "puppetlabs/postgresql"
 #mod "tracywebtech/pip"

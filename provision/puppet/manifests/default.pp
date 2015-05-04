@@ -41,10 +41,10 @@ node default {
   # # Class['erlang'] -> Class['elsa']
   # # Class['erlang'] -> Class['elixir']
 
-  # class { '::emacs':
-  #   username => 'vagrant',
-  #   version  => 'emacs24',
-  # }
+  class { '::emacs':
+    username => 'vagrant',
+    version  => 'emacs24',
+  }
 
   # class { 'elsa':
   #   # erlang_manage => false
