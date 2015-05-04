@@ -1,0 +1,23 @@
+#+TITLE: agrant dev linux box with standard packages provisioned by Puppet   
+#+AUTHOR:   Roman Shestakov
+#+LANGUAGE: en
+
+* Description
+
+a base Vagrant VM provisioned with puppet and librarian-puppet
+uses standard Debian precise64 box
+
+* Install vagrant-cachier vagrant plugin:
+ #+BEGIN_SRC 
+vagrant plugin install vagrant-cachier 
+ #+END_SRC
+
+[[https://github.com/fgrehm/vagrant-cachier][Vagrant-cachier]]
+
+#+BEGIN_SRC 
+vagrant plugin install vagrant-cachier
+#+END_SRC
+* Puppet setup
+
+  
+

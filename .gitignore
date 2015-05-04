@@ -1,0 +1,13 @@
+*.beam
+.eunit
+*~
+doc/*
+.vagrant/*
+log/*
+provision/puppet/Puppetfile.lock
+provision/puppet/.*
+provision/puppet/.tmp
+provision/puppet/.librarian
+
+
+
