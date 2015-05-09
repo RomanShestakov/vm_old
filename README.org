@@ -4,20 +4,44 @@
 
 * Description
 
-a base Vagrant VM provisioned with puppet and librarian-puppet
-uses standard Debian precise64 box
+A base Vagrant VM provisioned with puppet and librarian-puppet
+uses standard Debian precise64 box. Could be used as base box for dev projects
+as avoids running provisioning for basic tools.
 
-* Install vagrant-cachier vagrant plugin:
- #+BEGIN_SRC 
-vagrant plugin install vagrant-cachier 
- #+END_SRC
+* Base Shell scripts install:
+** essential build tools.
+** ruby
+** puppet
+** erlang
+** librarian-puppet
+** texinfo
 
-[[https://github.com/fgrehm/vagrant-cachier][Vagrant-cachier]]
+* Puppet setup installs
+** emacs along with emacs.d from https://github.com/RomanShestakov/.emacs.d.git
+  
+* How to package this provisioned box into base box
+https://scotch.io/tutorials/how-to-create-a-vagrant-base-box-from-an-existing-one
+
+** check vm from github and provision it
+git clone https://github.com/RomanShestakov/vm.git
+cd vm
+vagrant up
+
+** package newly provisioned box into a new base box
+vagrant package --output ros.box
+vagrant box add rosbox ros.box
+** init new Vagrant box:
+vagrant init rosbox
+** Vagrant file
 
 #+BEGIN_SRC 
-vagrant plugin install vagrant-cachier
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  config.vm.box = "roxbox"
+  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.hostname = "rosbox"
+  config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=666"]
+end
 #+END_SRC
-* Puppet setup
-
-  
 
