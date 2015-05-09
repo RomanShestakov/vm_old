@@ -33,6 +33,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.private_key_path = [ '~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa' ]
   config.ssh.forward_agent = true
 
+  # create tmp 
+  config.vm.provision :shell do |shell|
+    shell.inline = "mkdir -p tmp; chmod 777 tmp"
+  end
+
   # install essential build tools
   config.vm.provision :shell do |shell|
     shell.path = "provision/shell/install_essential.sh"
