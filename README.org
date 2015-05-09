@@ -30,6 +30,7 @@ vagrant up
 ** package newly provisioned box into a new base box
 vagrant package --output ros.box
 vagrant box add rosbox ros.box
+# this will add rosbox into ~/.vagrant.d/boxes on the local host
 ** init new Vagrant box:
 vagrant init rosbox
 ** Vagrant file
