@@ -16,12 +16,29 @@ class emacs( $version = 'emacs24', $username = 'emacs' ) {
     }
   }
 
-  # magit mode in emacs depends on makeinfo, so need texinfo pkg
-  if !defined(Package['texinfo']) {
-    package{'texinfo':
-      ensure => present,
-    }
-  }
+  # apt::source { 'debian_unstable':
+  #   comment  => 'This is the iWeb Debian unstable mirror',
+  #   location => 'http://debian.mirror.iweb.ca/debian/',
+  #   release  => 'unstable',
+  #   repos    => 'main contrib non-free',
+  #   pin      => '-10',
+  #   key      => {
+  #     'id'     => 'A1BD8E9D78F7FE5C3E65D8AF8B48AD6246925553',
+  #     'server' => 'subkeys.pgp.net',
+  #   },
+  #   include  => {
+  #     'src' => true,
+  #     'deb' => true,
+  #   },
+  # }
+  
+  # # magit mode in emacs depends on makeinfo, so need texinfo pkg
+  # ## http://www.linuxfromscratch.org/lfs/view/stable/chapter05/texinfo.html
+  # if !defined(Package['texinfo']) {
+  #   package{'texinfo':
+  #     ensure => present,
+  #   }
+  # }
 
   # distel mode in emacs depends on texlive
   if !defined(Package['texlive']) {
@@ -37,21 +54,6 @@ class emacs( $version = 'emacs24', $username = 'emacs' ) {
     }
   }
 
-  # group { $username:
-  #   ensure => present,
-  #   gid    => 2100,
-  # }
-  
-  # user{ $username :
-  #   ensure     => present,
-  #   gid        => $group,
-  #   require    => Group[ $group ],
-  #   uid        => 2100,
-  #   home       => "/home/${username}",
-  #   shell      => "/bin/bash",
-  #   managehome => true,
-  # }
-  
   exec { 'initial update':
     command => '/usr/bin/apt-get -y update',
     path    => "/sbin:/usr/bin:/usr/local/bin/:/bin/",
@@ -89,18 +91,11 @@ class emacs( $version = 'emacs24', $username = 'emacs' ) {
     require => Exec[ 'second update' ],
   }
 
-  # file { "/home/$username/.emacs.d":
-  #   path => "/home/$username/.emacs.d",
-  #   ensure => 'directory',
-  #   owner => $username,
-  #   mode => '755',
-  # }
-  
-  # vcsrepo{ "/home/$username/.emacs.d":
-  #   ensure => latest,
-  #   provider => git,
-  #   source => 'https://github.com/RomanShestakov/.emacs.d',
-  #   revision => 'master',
-  #   require => [ File[ "/home/$username/.emacs.d" ] ],
-  # }
+  vcsrepo{ "/home/$username/.emacs.d":
+    ensure => latest,
+    provider => git,
+    source => 'https://github.com/RomanShestakov/.emacs.d',
+    revision => 'master',
+    user => $username
+  }
 }

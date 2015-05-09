@@ -14,6 +14,7 @@ forge "https://forgeapi.puppetlabs.com"
 # mod "garethr/erlang"
 # mod "camptocamp/archive"
 mod 'puppetlabs-vcsrepo'
+mod 'puppetlabs-apt'
 # mod "tracywebtech/supervisor" 
 # mod "puppetlabs/postgresql"
 #mod "tracywebtech/pip"
