@@ -23,17 +23,25 @@ as avoids running provisioning for basic tools.
 https://scotch.io/tutorials/how-to-create-a-vagrant-base-box-from-an-existing-one
 
 ** check vm from github and provision it
+#+BEGIN_SRC 
 git clone https://github.com/RomanShestakov/vm.git
 cd vm
 vagrant up
+#+END_SRC
 
 ** package newly provisioned box into a new base box
+#+BEGIN_SRC 
+# this will add rosbox into ~/.vagrant.d/boxes on the local host
 vagrant package --output ros.box
 vagrant box add rosbox ros.box
-# this will add rosbox into ~/.vagrant.d/boxes on the local host
+#+END_SRC
+
 ** init new Vagrant box:
+#+BEGIN_SRC 
 vagrant init rosbox
-** Vagrant file
+#+END_SRC
+
+** Vagrant file example
 
 #+BEGIN_SRC 
 # -*- mode: ruby -*-
