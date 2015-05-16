@@ -1,66 +1,43 @@
 # -*- mode: puppet-mode -*-
 # vi: set ft=ruby :
 
-# http://www.puppetcookbook.com/posts/set-global-exec-path.html
-Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/", "/usr/local/bin/" ] }
+  # http://www.puppetcookbook.com/posts/set-global-exec-path.html
+  Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/", "/usr/local/bin/" ] }
 
-# create a new run stage to ensure certain modules are included first
-stage { 'pre':
-  before => Stage['main']
-}
-
-# # add the baseconfig module to the new 'pre' run stage
-# class { 'known_hosts':
-#   stage => 'pre'
-# }
-
-# add the baseconfig module to the new 'pre' run stage
-class { 'baseconfig':
-  stage => 'pre'
-}
-
-# # add the baseconfig module to the new 'pre' run stage
-# class { 'erlang':
-#   stage => 'pre'
-# }
-
-# # add the baseconfig module to the new 'pre' run stage
-# class { 'archive':
-#   stage => 'pre'
-# }
-
-node default {
-  
-  #include 'baseconfig'
-
-  # class{ 'erlang':
-  #   package_name => 'erlang'
-  # }
-
-  #Class['erlang'] -> Class['::emacs']
-  # # Class['erlang'] -> Class['elsa']
-  # # Class['erlang'] -> Class['elixir']
-
-  class { '::emacs':
-    username => 'vagrant',
-    version  => 'emacs24',
+  # create a new run stage to ensure certain modules are included first
+  stage { 'pre':
+    before => Stage['main']
   }
+  
+  # # add the baseconfig module to the new 'pre' run stage
+  # class { 'known_hosts':
+    #   stage => 'pre'
+    # }
+  
+  # add the baseconfig module to the new 'pre' run stage
+  class { 'baseconfig':
+    stage => 'pre'
+  }
+  
+  node default {
 
-  # class { 'elsa':
-  #   # erlang_manage => false
-  # }
+    class { '::emacs':
+      username => 'vagrant',
+      version  => 'emacs24',
+    }
 
-  # class { 'elasticsearch':
-  #   version => '0.90.0',
-  # }
+    class { 'python' :
+      version    => 'system',
+      pip        => true,
+      dev        => true,
+      virtualenv => true,
+      gunicorn   => true,
+    }
 
-  # class { 'elixir': 
-  #   version => '0.13.2' }
- 
-  # class { 'postgre': }
+    class { 'ipython' : }
 
- }
-
+    Class['python'] -> Class['ipython']
+  }
 
 
 

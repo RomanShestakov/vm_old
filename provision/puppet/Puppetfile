@@ -23,5 +23,10 @@ mod 'puppetlabs-apt'
 # mod "alphagov/puppet-curl",
 #   :git => "git://github.com/alphagov/puppet-curl.git"
 
+mod "stankevich-python",
+  :git => "git://github.com/stankevich/puppet-python.git"
+
+mod "puppet-ipython",
+  :git => "git://github.com/RomanShestakov/puppet-ipython.git"
 
 
