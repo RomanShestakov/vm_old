@@ -71,11 +71,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     shell.path = "provision/shell/install_erlang.sh"
   end
 
-  # install texinfo v. 5.2 - flycheck install depends on it
-  config.vm.provision :shell do |shell|
-    shell.path = "provision/shell/install_texinfo.sh"
-    shell.args = "5.2"
-  end
+  # # install texinfo v. 5.2 - flycheck install depends on it
+  # config.vm.provision :shell do |shell|
+  #   shell.path = "provision/shell/install_texinfo.sh"
+  #   shell.args = "5.2"
+  # end
 
   # # # install docker as some puppet code which builds magma needs docker
   # # config.vm.provision :shell, :path => "provision/shell/install_docker.sh"
@@ -89,3 +89,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
 end
+
+
+
