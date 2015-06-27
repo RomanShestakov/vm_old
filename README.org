@@ -1,50 +1,51 @@
-#+TITLE: vagrant dev linux box
+#+TITLE: README for Vagrant dev linux box
 #+AUTHOR:   Roman Shestakov
 #+LANGUAGE: en
 
 * Description
 
-A base Vagrant VM provisioned with puppet and librarian-puppet
-uses standard Debian precise64 box. Could be used as base box for dev projects
-as avoids running provisioning for basic tools.
+A base Vagrant VM provisioned with puppet and librarian-puppet. The VM
+uses standard Debian precise64 box. It could be used as a base box for certain dev
+projects as it has provisioning for some basic tools.
 
-* Base Shell scripts install:
-** essential build tools.
-** ruby
-** puppet
-** erlang
-** librarian-puppet
-** texinfo
+* On startup the VM runs the shell scripts to install:
+- essential build tools.
+- ruby
+- puppet
+- erlang
+- librarian-puppet
+- texinfo
 
-* Puppet setup installs
-** emacs along with emacs.d from https://github.com/RomanShestakov/.emacs.d.git
-  
-* How to package this provisioned box into base box
+* VM would also execute the Puppet setup installs:
+- emacs v24.4
+- emacs.d from https://github.com/RomanShestakov/.emacs.d.git
+
+* How to create a base box:
 https://scotch.io/tutorials/how-to-create-a-vagrant-base-box-from-an-existing-one
 
-** check vm from github and provision it
-#+BEGIN_SRC 
+- check vm from github and provision it
+#+BEGIN_SRC
 git clone https://github.com/RomanShestakov/vm.git
 cd vm
 vagrant up
 #+END_SRC
 
-** package newly provisioned box into a new base box
-#+BEGIN_SRC 
+- package newly provisioned box into a new base box
+#+BEGIN_SRC
 # this will add rosbox into ~/.vagrant.d/boxes on the local host
 ## make sure rox.box file is removed from vm dir
 vagrant package --output ros.box
 vagrant box add rosbox ros.box --force
 #+END_SRC
 
-** init new Vagrant box:
-#+BEGIN_SRC 
+- init new Vagrant box:
+#+BEGIN_SRC
 vagrant init rosbox
 #+END_SRC
 
-** Vagrant file example
+- Vagrant file example
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
@@ -54,4 +55,3 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=666"]
 end
 #+END_SRC
-
