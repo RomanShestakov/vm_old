@@ -23,9 +23,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # to install vagrant-cachier plugin run:
   # vagrant plugin install vagrant-cachier
   config.cache.auto_detect = true
-  
+
   # Set hostname
-  config.vm.host_name = "ros"
+  # config.vm.host_name = "ros"
 
   # Enable SSH agent forwarding for github
   # https://coderwall.com/p/p3bj2a
@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.private_key_path = [ '~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa' ]
   config.ssh.forward_agent = true
 
-  # create tmp 
+  # create tmp
   config.vm.provision :shell do |shell|
     shell.inline = "mkdir -p tmp; chmod 777 tmp"
   end
@@ -51,11 +51,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     shell.path = "provision/shell/install_ruby.sh"
     shell.args = "2.2.1"
   end
-  
+
   config.vm.provision :shell do |shell|
-    shell.path = "provision/shell/install_puppet.sh" 
+    shell.path = "provision/shell/install_puppet.sh"
   end
-  
+
   # install librarian-puppet and run it to install puppet common modules.
   # This has to be done before puppet provisioning so that modules are available
   # when puppet tries to parse its manifests
@@ -89,6 +89,3 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
 end
-
-
-
