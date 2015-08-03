@@ -20,6 +20,7 @@ if [ ! -f tmp/erlang-repos-added ]; then
 fi
 
 # # Install/update erlang
-sudo apt-get install -y erlang
+sudo apt-get install -y erlang=1:17.5.3
+# latest version
+# sudo apt-get install -y erlang
 #sudo yum -y install erlang
-
