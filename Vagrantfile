@@ -80,12 +80,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # # # install docker as some puppet code which builds magma needs docker
   # # config.vm.provision :shell, :path => "provision/shell/install_docker.sh"
 
-  # run puppet
-  config.vm.provision :puppet do |d|
-    # d.options = "--verbose --debug"
-    d.manifests_path = "provision/puppet/manifests"
-    d.manifest_file = "default.pp"
-    d.module_path = [ 'provision/puppet/modules' ]
-  end
+  # # run puppet
+  # config.vm.provision :puppet do |d|
+  #   # d.options = "--verbose --debug"
+  #   d.manifests_path = "provision/puppet/manifests"
+  #   d.manifest_file = "default.pp"
+  #   d.module_path = [ 'provision/puppet/modules' ]
+  # end
 
 end

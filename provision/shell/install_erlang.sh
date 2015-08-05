@@ -1,26 +1,18 @@
 #!/usr/bin/env bash
 
 if [ ! -f tmp/erlang-repos-added ]; then
-	# Grab the repository package and install
-    wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
-    sudo dpkg -i erlang-solutions_1.0_all.deb
-    #wget http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
-    #rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
+	  # Grab the repository package and install
+    curl -O http://erlang.org/download/otp_src_17.5.tar.gz
+    tar zxvf otp_src_17.5.tar.gz
+
     # Note that we've been here
     mkdir -p tmp
     touch tmp/erlang-repos-added
 
-    # Update our repository lists
-    sudo apt-get update -y
-    #sudo yum -y install erlang
-
     # Remove the package
-    rm erlang-solutions_1.0_all.deb
-    #rm erlang-solutions-1.0-1.noarch.rpm
+    rm otp_src_17.5.tar.gz
 fi
 
-# # Install/update erlang
-sudo apt-get install -y erlang=1:17.5.3
-# latest version
-# sudo apt-get install -y erlang
-#sudo yum -y install erlang
+# Install/update erlang
+cd otp_src_17.5
+./configure && make && make install
