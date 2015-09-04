@@ -8,13 +8,9 @@ A base Vagrant VM provisioned with puppet and librarian-puppet. The VM
 uses standard Debian precise64 box. It could be used as a base box for certain dev
 projects as it has provisioning for some basic tools.
 
-* On startup the VM runs the shell scripts to install:
+* On startup the VM runs the ansible provision to install
 - essential build tools.
-- ruby
-- puppet
 - erlang
-- librarian-puppet
-- texinfo
 
 * VM would also execute the Puppet setup installs:
 - emacs v24.4
@@ -44,16 +40,4 @@ vagrant box add rosbox ros.box --force
 #+BEGIN_SRC
 # this will create a Vagrantfile in the current dir
 vagrant init rosbox
-#+END_SRC
-
-- Vagrant file example
-#+BEGIN_SRC
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-Vagrant.configure("2") do |config|
-  config.vm.box = "roxbox"
-  config.vm.network "private_network", ip: "192.168.33.10"
-  config.vm.hostname = "rosbox"
-  config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=666"]
-end
 #+END_SRC
