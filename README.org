@@ -29,15 +29,15 @@ vagrant up
 - package newly provisioned box into a new base box
 #+BEGIN_SRC
 # package the VM into a new vagrant box.
-# this will create ros.box file in the vm dir
-vagrant package --output ros.box
+# this will create vm.box file in the vm dir
+vagrant package --output vm.box
 # add the new box into Vagrant install into ~/.vagrant.d/boxes on the local host
-# make sure ros.box file is removed from vm dir
-vagrant box add rosbox ros.box --force
+# make sure vm.box file is removed from vm dir
+vagrant box add vmbox vm.box --force
 #+END_SRC
 
 - init new Vagrant box:
 #+BEGIN_SRC
 # this will create a Vagrantfile in the current dir
-vagrant init rosbox
+vagrant init vmbox
 #+END_SRC
