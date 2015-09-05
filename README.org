@@ -34,10 +34,13 @@ vagrant package --output vm.box
 # add the new box into Vagrant install into ~/.vagrant.d/boxes on the local host
 # make sure vm.box file is removed from vm dir
 vagrant box add vmbox vm.box --force
+# now the vagrant config file which want to use this box on the local host
+# should have a reference to it:
+config.vm.box = "vmbox"
 #+END_SRC
 
 - init new Vagrant box:
 #+BEGIN_SRC
-# this will create a Vagrantfile in the current dir
+# this will create a Vagrantfile in the current dir:
 vagrant init vmbox
 #+END_SRC
