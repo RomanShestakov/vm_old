@@ -1,26 +1,17 @@
 # file: erlang/tasks/source.yml
 
-# - name: Erlang | Make sure the build dependencies are installed
-#   sudo: true
-#   apt:
-#     pkg: "{{item}}"
-#     state: present
-#   with_items: ["libncurses5-dev", "openssl", "libssl-dev", "fop"]
-
-#pre_tasks:
-- name: check apt last update
-  stat: path=/var/cache/apt
-  register: apt_cache_stat
-- name: update apt if needed
-  apt: update_cache=yes
-  when: ansible_date_time.epoch|float - apt_cache_stat.stat.mtime > 60*60*12
-
 - name: Erlang | Make sure the build dependencies are installed
   sudo: true
-  apt:
-    pkg: "{{item}}"
-    state: present
-  with_items: ["build-essential", "git-core", "python-software-properties", "curl", "libncurses5-dev", "openssl", "libssl-dev", "fop"]
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
+  with_items:
+    - build-essential
+    - git-core
+    - python-software-properties
+    - curl
+    - libncurses5-dev
+    - openssl
+    - libssl-dev
+    - fop
 
 - name: Erlang | Download the erlang source
   get_url:
