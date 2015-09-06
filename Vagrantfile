@@ -30,9 +30,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.forward_agent = true
 
   config.vm.provision "ansible" do |ansible|
-    ansible.verbose = "vvv"
+    # ansible.verbose = "vvv"
     ansible.playbook = 'provision/ansible/playbooks/vm.yml'
-    ansible.sudo = false
+    ansible.sudo = true
     ansible.inventory_path = 'provision/ansible/playbooks/inventory'
     ansible.host_key_checking = false
   end

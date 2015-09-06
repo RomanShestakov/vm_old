@@ -1,5 +1,9 @@
 # file: erlang/tasks/source.yml
 
+- name: ensure emacs repository is registered
+  sudo: true
+  action: apt_repository repo=ppa:cassou/emacs
+
 - name: Erlang | Make sure the build dependencies are installed
   sudo: true
   apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
@@ -14,7 +18,18 @@
     - fop
     - autotools-dev
     - automake
-    #- libproc-dev # for erld
+    - libproc-dev
+
+- name: Emacs install
+  sudo: true
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
+  with_items:
+    - emacs24
+    - emacs24-el
+    - emacs24-common-non-dfsg
+    - sbcl
+    - sbcl-doc
+    - sbcl-source
 
 - name: Erlang | Download the erlang source
   get_url:
