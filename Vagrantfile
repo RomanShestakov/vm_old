@@ -27,11 +27,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # # https://coderwall.com/p/p3bj2a
   # config.ssh.username = 'vagrant'
   # config.ssh.private_key_path = [ '~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa' ]
-  # config.ssh.forward_agent = true
+  config.ssh.forward_agent = true
 
   config.vm.provision "ansible" do |ansible|
+    ansible.verbose = "vvv"
     ansible.playbook = 'provision/ansible/playbooks/vm.yml'
-    ansible.sudo = true
+    ansible.sudo = false
     ansible.inventory_path = 'provision/ansible/playbooks/inventory'
     ansible.host_key_checking = false
   end

@@ -12,6 +12,9 @@
     - openssl
     - libssl-dev
     - fop
+    - autotools-dev
+    - automake
+    #- libproc-dev # for erld
 
 - name: Erlang | Download the erlang source
   get_url:
