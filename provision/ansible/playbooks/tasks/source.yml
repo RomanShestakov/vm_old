@@ -67,4 +67,4 @@
 
 - name: Ruby | Install erlnixify gem
   sudo: yes
-  command: bash -lc "gem install erlnixify"
+  command: bash -lc "gem install erlnixify -v 0.0.8"
