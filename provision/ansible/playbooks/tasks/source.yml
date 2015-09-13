@@ -18,6 +18,7 @@
     - fop
     - autotools-dev
     - automake
+    - libproc-dev
 
 - name: Emacs install
   sudo: true
@@ -53,18 +54,23 @@
   command: "make install chdir=/tmp/otp_src_{{erlang_version}}"
   when: erlang_downloaded.changed
 
-- name: Latest version of Ruby is installed
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - ruby1.9.3
-    # - ruby-1.9.3-dev
+- name: Erld | Download the source
+  git: repo={{ erld_repo_url }} dest="/tmp/erld" accept_hostkey=yes
+  register: erld_downloaded
 
-- name: Symlink exists for Ruby 1.9.3
-  file: src=/usr/bin/ruby1.9.3 dest=/usr/local/bin/ruby state=link
+- name: Erld | Bootstrap erld
+  command: "./bootstrap.sh chdir=/tmp/erld"
+  when: erld_downloaded.changed
 
-# - name: Symlink exists for Ruby Gems 2.0
-#   file: src=/usr/bin/gem1.9.3 dest=/usr/local/bin/gem state=link
+- name: Erld | Build erld from source - pt. 1 (configure)
+  command: "./configure chdir=/tmp/erld"
+  when: erld_downloaded.changed
 
-- name: Ruby | Install erlnixify gem
-  sudo: yes
-  command: bash -lc "gem install erlnixify -v 0.0.8"
+- name: Erld | Build erld from source - pt. 2 (make)
+  command: "make chdir=/tmp/erld"
+  when: erld_downloaded.changed
+
+- name: Erld | Build erld from source - pt. 3 (make install)
+  sudo: true
+  command: "make install chdir=/tmp/erld"
+  when: erld_downloaded.changed

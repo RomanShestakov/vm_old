@@ -1,2 +1,3 @@
 erlang_version: "17.3"
 erlang_build_flags: ""
+erld_repo_url: "https://github.com/ShoreTel-Inc/erld.git"
