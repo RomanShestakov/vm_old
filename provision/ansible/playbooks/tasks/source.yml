@@ -54,23 +54,17 @@
   command: "make install chdir=/tmp/otp_src_{{erlang_version}}"
   when: erlang_downloaded.changed
 
-- name: Erld | Download the source
+- name: ERLD | Download ERLD sources
   git: repo={{ erld_repo_url }} dest="/tmp/erld" accept_hostkey=yes
+  sudo: true
   register: erld_downloaded
 
-- name: Erld | Bootstrap erld
-  command: "./bootstrap.sh chdir=/tmp/erld"
-  when: erld_downloaded.changed
-
-- name: Erld | Build erld from source - pt. 1 (configure)
-  command: "./configure chdir=/tmp/erld"
-  when: erld_downloaded.changed
-
-- name: Erld | Build erld from source - pt. 2 (make)
-  command: "make chdir=/tmp/erld"
-  when: erld_downloaded.changed
-
-- name: Erld | Build erld from source - pt. 3 (make install)
+- name: ERLD | bootsrap | configure | install
   sudo: true
-  command: "make install chdir=/tmp/erld"
+  shell: 'cd /tmp/erld; {{item}}'
+  with_items:
+    - ./bootstrap.sh
+    - ./configure
+    - make
+    - make install
   when: erld_downloaded.changed
