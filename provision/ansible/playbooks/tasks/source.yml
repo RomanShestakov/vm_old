@@ -1,10 +1,21 @@
 # file: erlang/tasks/source.yml
 
-- name: ensure emacs repository is registered
-  sudo: true
-  action: apt_repository repo=ppa:cassou/emacs
+# - name: ensure emacs repository is registered
+#   sudo: true
+#   action: apt_repository repo=ppa:cassou/emacs
 
-- name: Erlang | Make sure the build dependencies are installed
+# - name: Emacs install
+#   sudo: true
+#   apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
+#   with_items:
+#     - emacs24
+#     - emacs24-el
+#     - emacs24-common-non-dfsg
+#     - sbcl
+#     - sbcl-doc
+#     - sbcl-source
+
+- name: Make sure the build dependencies are installed
   sudo: true
   apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
   with_items:
@@ -20,16 +31,26 @@
     - automake
     - libproc-dev
 
-- name: Emacs install
+- name: EMACS | get emacs from git repository
+  git: repo={{ emacs_repo_url }} dest="/tmp/emacs" accept_hostkey=yes version={{ emacs_version }}
   sudo: true
-  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
-  with_items:
-    - emacs24
-    - emacs24-el
-    - emacs24-common-non-dfsg
-    - sbcl
-    - sbcl-doc
-    - sbcl-source
+  register: emacs_downloaded
+
+- name: EMACS | make emacs configure file
+  command: ./autogen.sh chdir="/tmp/emacs"
+  when: emacs_downloaded.changed
+
+- name: EMACS | make emacs Makefile
+  command: ./configure --prefix=/usr/local --without-makeinfo --with-x-toolkit=no --without-all chdir="/tmp/emacs"
+  when: emacs_downloaded.changed
+
+- name: EMACS | make emacs
+  command: make chdir="/tmp/emacs"
+  when: emacs_downloaded.changed
+
+- name: EMACS | install emacs
+  command: make install chdir="/tmp/emacs"
+  when: emacs_downloaded.changed
 
 - name: Erlang | Download the erlang source
   get_url:
