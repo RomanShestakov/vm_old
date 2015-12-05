@@ -1,19 +1,4 @@
-# file: erlang/tasks/source.yml
-
-# - name: ensure emacs repository is registered
-#   sudo: true
-#   action: apt_repository repo=ppa:cassou/emacs
-
-# - name: Emacs install
-#   sudo: true
-#   apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
-#   with_items:
-#     - emacs24
-#     - emacs24-el
-#     - emacs24-common-non-dfsg
-#     - sbcl
-#     - sbcl-doc
-#     - sbcl-source
+# file: tasks/source.yml
 
 - name: Make sure the build dependencies are installed
   sudo: true
@@ -31,61 +16,90 @@
     - automake
     - libproc-dev
 
-- name: EMACS | get emacs from git repository
-  git: repo={{ emacs_repo_url }} dest="/tmp/emacs" accept_hostkey=yes version={{ emacs_version }}
-  sudo: true
-  register: emacs_downloaded
+# - name: BASH | get dotfiles from git repository
+#   git: repo={{ dotfiles_repo_url }} dest="/tmp/dotfiles" accept_hostkey=yes
+#   sudo: true
+#   register: dotfiles_downloaded
 
-- name: EMACS | make emacs configure file
-  command: ./autogen.sh chdir="/tmp/emacs"
-  when: emacs_downloaded.changed
+# - name: BASH | install dotfiles
+#   command: ./bootstrap.sh chdir="/tmp/dotfiles"
+#   when: dotfiles_downloaded.changed
 
-- name: EMACS | make emacs Makefile
-  command: ./configure --prefix=/usr/local --without-makeinfo --with-x-toolkit=no --without-all chdir="/tmp/emacs"
-  when: emacs_downloaded.changed
+# - name: install virtualenv
+#   apt: name=python-virtualenv state=present
 
-- name: EMACS | make emacs
-  command: make chdir="/tmp/emacs"
-  when: emacs_downloaded.changed
+# - name: PIP | install flake8
+#   pip: name=flake8
 
-- name: EMACS | install emacs
-  command: make install chdir="/tmp/emacs"
-  when: emacs_downloaded.changed
+# - name: PIP | install pylint
+#   pip: name=pylint
 
-- name: Erlang | Download the erlang source
-  get_url:
-    url: "http://erlang.org/download/otp_src_{{erlang_version}}.tar.gz"
-    dest: "/tmp/otp_src_{{erlang_version}}.tar.gz"
-  register: erlang_downloaded
 
-- name: Erlang | Unpack the compressed erlang source
-  command: tar -xvzf /tmp/otp_src_{{erlang_version}}.tar.gz chdir=/tmp creates=/tmp/otp_src_{{erlang_version}}/README.md
-  when: erlang_downloaded.changed
+# - name: EMACS | get emacs from git repository
+#   git: repo={{ emacs_repo_url }} dest="/tmp/emacs" accept_hostkey=yes version={{ emacs_version }}
+#   sudo: true
+#   register: emacs_downloaded
 
-- name: Erlang | Build erlang from source - pt. 1 (configure)
-  command: "./configure chdir=/tmp/otp_src_{{erlang_version}}"
-  when: erlang_downloaded.changed
+# - name: EMACS | make emacs configure file
+#   command: ./autogen.sh chdir="/tmp/emacs"
+#   when: emacs_downloaded.changed
 
-- name: Erlang | Build erlang from source - pt. 2 (make)
-  command: "make chdir=/tmp/otp_src_{{erlang_version}}"
-  when: erlang_downloaded.changed
+# - name: EMACS | make emacs Makefile
+#   command: ./configure --prefix=/usr/local --without-makeinfo --with-x-toolkit=no --without-all chdir="/tmp/emacs"
+#   when: emacs_downloaded.changed
 
-- name: Erlang | Build erlang from source - pt. 3 (make install)
-  sudo: true
-  command: "make install chdir=/tmp/otp_src_{{erlang_version}}"
-  when: erlang_downloaded.changed
+# - name: EMACS | make emacs
+#   command: make chdir="/tmp/emacs"
+#   when: emacs_downloaded.changed
 
-- name: ERLD | Download ERLD sources
-  git: repo={{ erld_repo_url }} dest="/tmp/erld" accept_hostkey=yes
-  sudo: true
-  register: erld_downloaded
+# - name: EMACS | install emacs
+#   command: make install chdir="/tmp/emacs"
+#   when: emacs_downloaded.changed
 
-- name: ERLD | bootsrap | configure | install
-  sudo: true
-  shell: 'cd /tmp/erld; {{item}}'
-  with_items:
-    - ./bootstrap.sh
-    - ./configure
-    - make
-    - make install
-  when: erld_downloaded.changed
+# - name: BASH | get dotfiles from git repository
+#   git: repo={{ dot_emacs_repo_url }} dest="/tmp/dotfiles" accept_hostkey=yes
+#   sudo: true
+#   register: dotfiles_downloaded
+
+# - name: EMACS | get .emacs from git repository
+#   git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant" accept_hostkey=yes
+#   #sudo: true
+#   register: emacs_downloaded.changed
+
+# - name: Erlang | Download the erlang source
+#   get_url:
+#     url: "http://erlang.org/download/otp_src_{{erlang_version}}.tar.gz"
+#     dest: "/tmp/otp_src_{{erlang_version}}.tar.gz"
+#   register: erlang_downloaded
+
+# - name: Erlang | Unpack the compressed erlang source
+#   command: tar -xvzf /tmp/otp_src_{{erlang_version}}.tar.gz chdir=/tmp creates=/tmp/otp_src_{{erlang_version}}/README.md
+#   when: erlang_downloaded.changed
+
+# - name: Erlang | Build erlang from source - pt. 1 (configure)
+#   command: "./configure chdir=/tmp/otp_src_{{erlang_version}}"
+#   when: erlang_downloaded.changed
+
+# - name: Erlang | Build erlang from source - pt. 2 (make)
+#   command: "make chdir=/tmp/otp_src_{{erlang_version}}"
+#   when: erlang_downloaded.changed
+
+# - name: Erlang | Build erlang from source - pt. 3 (make install)
+#   sudo: true
+#   command: "make install chdir=/tmp/otp_src_{{erlang_version}}"
+#   when: erlang_downloaded.changed
+
+# - name: ERLD | Download ERLD sources
+#   git: repo={{ erld_repo_url }} dest="/tmp/erld" accept_hostkey=yes
+#   sudo: true
+#   register: erld_downloaded
+
+# - name: ERLD | bootsrap | configure | install
+#   sudo: true
+#   shell: 'cd /tmp/erld; {{item}}'
+#   with_items:
+#     - ./bootstrap.sh
+#     - ./configure
+#     - make
+#     - make install
+#   when: erld_downloaded.changed

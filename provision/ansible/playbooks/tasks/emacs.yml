@@ -1,0 +1,22 @@
+# file: tasks/emacs.yml
+
+- name: EMACS | get emacs from git repository
+  git: repo={{ emacs_repo_url }} dest="/tmp/emacs" accept_hostkey=yes version={{ emacs_version }}
+  sudo: true
+  register: emacs_downloaded
+
+- name: EMACS | make emacs configure file
+  command: ./autogen.sh chdir="/tmp/emacs"
+  when: emacs_downloaded.changed
+
+- name: EMACS | make emacs Makefile
+  command: ./configure --prefix=/usr/local --without-makeinfo --with-x-toolkit=no --without-all chdir="/tmp/emacs"
+  when: emacs_downloaded.changed
+
+- name: EMACS | make emacs
+  command: make chdir="/tmp/emacs"
+  when: emacs_downloaded.changed
+
+- name: EMACS | install emacs
+  command: make install chdir="/tmp/emacs"
+  when: emacs_downloaded.changed
