@@ -1,0 +1,12 @@
+# file: tasks/python.yml
+
+- name: install virtualenv
+  sudo: true
+  apt: name=python-virtualenv state=present
+
+# - name: PIP | install flake8
+#   pip: name=flake8
+
+- name: PIP | install pylint
+  sudo: true
+  pip: name=pylint
