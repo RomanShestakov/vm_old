@@ -7,6 +7,7 @@
 #  when: current_erlang_version.changed
 # - name: Erlang | Persist current version
 #   copy: dest=/var/cache/anxs-erlang-version content="{{erlang_version}}"
+
 - include: bash.yml
 
 #  when: current_erlang_version.changed

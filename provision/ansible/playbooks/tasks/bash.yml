@@ -2,7 +2,7 @@
 
 - name: BASH | get dotfiles from git repository
   git: repo={{ dotfiles_repo_url }} dest="/tmp/dotfiles" accept_hostkey=yes
-  sudo: true
+  # sudo: true
   register: dotfiles_downloaded
 
 - name: BASH | install dotfiles
@@ -10,10 +10,12 @@
 #  when: dotfiles_downloaded.changed
 
 - name: install virtualenv
+  sudo: true
   apt: name=python-virtualenv state=present
 
-- name: PIP | install flake8
-  pip: name=flake8
+# - name: PIP | install flake8
+#   pip: name=flake8
 
 - name: PIP | install pylint
+  sudo: true
   pip: name=pylint

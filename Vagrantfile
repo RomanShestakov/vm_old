@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "ansible" do |ansible|
     # ansible.verbose = "vvv"
     ansible.playbook = 'provision/ansible/playbooks/vm.yml'
-    ansible.sudo = true
+    # ansible.sudo = true
     ansible.inventory_path = 'provision/ansible/playbooks/inventory'
     ansible.host_key_checking = false
   end

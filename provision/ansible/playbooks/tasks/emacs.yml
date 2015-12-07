@@ -2,7 +2,7 @@
 
 - name: EMACS | get emacs from git repository
   git: repo={{ emacs_repo_url }} dest="/tmp/emacs" accept_hostkey=yes version={{ emacs_version }}
-  sudo: true
+  # sudo: true
   register: emacs_downloaded
 
 - name: EMACS | make emacs configure file
@@ -19,4 +19,10 @@
 
 - name: EMACS | install emacs
   command: make install chdir="/tmp/emacs"
+  sudo: true
   when: emacs_downloaded.changed
+
+- name: EMACS | get .emacs git repository
+  git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes
+  # sudo: true
+  # when: emacs_downloaded.changed
