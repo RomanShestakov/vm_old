@@ -4,9 +4,14 @@
   sudo: true
   apt: name=python-virtualenv state=present
 
-# - name: PIP | install flake8
-#   pip: name=flake8
+- name: PIP | install flake8
+  sudo: true
+  pip: name=flake8
 
 - name: PIP | install pylint
   sudo: true
   pip: name=pylint
+
+- name: install ipython
+  sudo: true
+  pip: name=ipython
