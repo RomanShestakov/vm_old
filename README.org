@@ -25,9 +25,11 @@ a custom folder or URL
 * Dotfiles
 this configuration uses a fork of excellent collection of dotfiles -
 scripts used to customize linux env
-(https://github.com/mathiasbynens/dotfiles)
-.bash_profile is used during login and it sources .path, .bash_prompt, .exports, .aliases, .functions, .extra
-.bashrc is read everytime a new shell is started and it sources .bash_profile
+(https://github.com/mathiasbynens/dotfiles) .bash_profile is used
+during login and it sources .bashrc .bashrc is read everytime a new
+shell is started. This is a good place to add custom settings and it
+also sources .path, .bash_prompt, .exports, .aliases, .functions,
+.extra.
 [[http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html][Here]] is the good explanation of bash login scripts
 
 * How to create a base box:
