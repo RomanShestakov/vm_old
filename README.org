@@ -4,17 +4,31 @@
 
 * Description
 
-A base Vagrant VM provisioned with ansible. The VM
-uses standard Debian precise64 box. It could be used as a base box for certain dev
-projects as it has provisioning for some basic tools.
+A Vagrant VM provisioned with ansible. This VM uses standard Debian
+precise64 box. It could be used as a base box for certain dev projects
+as it has provisioning for some basic development tools, such as emacs, tmux, etc.
 
 * On startup the VM runs the ansible provision to install
 - essential build tools.
 - erlang
-
-* VM would also execute the Puppet setup installs:
-- emacs v24.4
+- python
+- emacs ver. 24.4 built from sources
+- dotfiles (https://github.com/RomanShestakov/dotfiles.git)
 - emacs.d from https://github.com/RomanShestakov/.emacs.d.git
+
+* iterm2 defaults
+iterm2 is a excellent terminal client for OSX but it requires changes
+to the profile to make key shortcuts work correctly for emacs.  The
+file with profiles defaults is stored in provision/iterm2_prefs and
+could be restored with Iterm2 in Preferences -> Load Preferences from
+a custom folder or URL
+* Dotfiles
+this configuration uses a fork of excellent collection of dotfiles -
+scripts used to customize linux env
+(https://github.com/mathiasbynens/dotfiles)
+.bash_profile is used during login and it sources .path, .bash_prompt, .exports, .aliases, .functions, .extra
+.bashrc is read everytime a new shell is started and it sources .bash_profile
+[[http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html][Here]] is the good explanation of bash login scripts
 
 * How to create a base box:
 https://scotch.io/tutorials/how-to-create-a-vagrant-base-box-from-an-existing-one
