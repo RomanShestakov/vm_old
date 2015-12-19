@@ -1,0 +1,35 @@
+# file: tasks/python.yml
+
+- name: install virtualenv
+  sudo: true
+  apt: name=python-virtualenv state=present
+
+- name: PIP | install flake8
+  sudo: true
+  pip: name=flake8
+
+- name: PIP | install pylint
+  sudo: true
+  pip: name=pylint
+
+- name: install ipython
+  sudo: true
+  pip: name=ipython
+
+# - name: install numpy via conda
+#   conda: name=numpy state=latest
+
+# - name: install scipy 0.14 via conda
+#   conda: name=scipy version="0.14"
+
+# - name: remove matplotlib from conda
+#   conda: name=matplotlib state=absent
+#miniconda_path: /home/user_name/.miniconda
+
+# miniconda_environments:
+#   - name: virtual_env_name
+#     python_version: 2.7
+#     pkgs: 'pip numpy pandas'
+#   - name: another_virtual_env
+#     python_version: 3.3
+#     pkgs: 'pip ipython'

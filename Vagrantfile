@@ -7,6 +7,8 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
+#ENV['ANSIBLE_CONFIG'] = "./provision/ansible/playbooks/ansible.cfg"
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
@@ -31,10 +33,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.forward_agent = true
 
   config.vm.provision "ansible" do |ansible|
-    # ansible.verbose = "vvv"
+    ansible.verbose = "vvv"
     ansible.playbook = 'provision/ansible/playbooks/vm.yml'
     # ansible.sudo = true
-    ansible.inventory_path = 'provision/ansible/playbooks/inventory'
+    ansible.inventory_path = 'provision/ansible/playbooks/production.ini'
     ansible.host_key_checking = false
+    #ansible.extra_vars = {ANSIBLE_CONFIG: './provision/ansible/playbooks/ansible.cfg'}
   end
 end

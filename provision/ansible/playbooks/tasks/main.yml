@@ -1,6 +1,0 @@
-- include: source.yml
-- include: python.yml
-- include: emacs.yml
-- include: erlang.yml
-# apply bash last to correctly set PATHs, etc to apps which we installed before
-- include: bash.yml
