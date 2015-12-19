@@ -1,15 +1,10 @@
-# - hosts: all
-#   vars_files:
-#     - 'defaults/main.yml'
-#   tasks:
-#     - include: 'tasks/main.yml'
 
 - name: vm.yml
   hosts: all
-
   roles:
     - { role: common, tags: ["common"] }
     - { role: python, tags: ["python"] }
     - { role: erlang, tags: ["erlang"] }
     - { role: emacs, tags: ["emacs"] }
     - { role: bash, tags: ["bash"] }
+    - { role: ANXS.postgresql, sudo: yes, tags: ["postgresql"] }

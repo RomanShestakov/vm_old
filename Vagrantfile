@@ -7,7 +7,13 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-#ENV['ANSIBLE_CONFIG'] = "./provision/ansible/playbooks/ansible.cfg"
+# run shell provision on the host machine to download external roles for Ansible
+system("
+    if [ #{ARGV[0]} = 'up' ]; then
+        echo 'You are doing vagrant up and can execute your script'
+        ./extensions/setup/role_update.sh
+    fi
+")
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
@@ -32,12 +38,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.ssh.private_key_path = [ '~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa' ]
   config.ssh.forward_agent = true
 
+  # run ansible
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "vvv"
     ansible.playbook = 'provision/ansible/playbooks/vm.yml'
     # ansible.sudo = true
     ansible.inventory_path = 'provision/ansible/playbooks/production.ini'
     ansible.host_key_checking = false
-    #ansible.extra_vars = {ANSIBLE_CONFIG: './provision/ansible/playbooks/ansible.cfg'}
   end
 end

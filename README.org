@@ -16,6 +16,8 @@ as it has provisioning for some basic development tools, such as emacs, tmux, et
 - dotfiles (https://github.com/RomanShestakov/dotfiles.git)
 - emacs.d from https://github.com/RomanShestakov/.emacs.d.git
 
+* Ansible setup
+the directory layout and some of the setup scripts are used from : https://github.com/enginyoyen/ansible-best-practises/
 * iterm2 defaults
 iterm2 is a excellent terminal client for OSX but it requires changes
 to the profile to make key shortcuts work correctly for emacs.  The
