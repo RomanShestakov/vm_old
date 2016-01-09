@@ -4,7 +4,7 @@
   sudo: true
   apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
   with_items:
-    - build-essential
+    # - build-essential
     - git-core
     - python-software-properties
     - curl
@@ -12,7 +12,7 @@
     - openssl
     - libssl-dev
     - fop
-    - autotools-dev
-    - automake
+    # - autotools-dev
+    # - automake
     - libproc-dev
     - tmux

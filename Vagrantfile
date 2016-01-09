@@ -11,7 +11,7 @@ VAGRANTFILE_API_VERSION = "2"
 system("
     if [ #{ARGV[0]} = 'up' ]; then
         echo 'You are doing vagrant up and can execute your script'
-        ./extensions/setup/role_update.sh
+        ./provision/ansible/playbooks/extensions/setup/role_update.sh
     fi
 ")
 

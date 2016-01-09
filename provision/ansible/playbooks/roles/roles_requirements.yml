@@ -1,3 +1,16 @@
+# roles_requirements.yml
+
+# from galaxy
+# - src: yatesr.timezone
+
+- src: git+https://github.com/ANXS/build-essential.git
+  version: "v1.0.1"
+  name: ANXS.build-essential
+
+- src: git+https://github.com/ANXS/erlang.git
+  version: "v1.1.0"
+  name: ANXS.erlang
+
 - src: git+https://github.com/ANXS/postgresql.git
   version: "v1.1.1"
   name: ANXS.postgresql
