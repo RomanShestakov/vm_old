@@ -5,14 +5,14 @@
   apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
   with_items:
     # - build-essential
-    - git-core
-    - python-software-properties
-    - curl
-    - libncurses5-dev
-    - openssl
-    - libssl-dev
-    - fop
+    # - git-core
+    # - python-software-properties
+    # - curl
+    # - libncurses5-dev
+    # - openssl
+    # - libssl-dev
+    # - fop
     # - autotools-dev
     # - automake
-    - libproc-dev
+    # - libproc-dev
     - tmux

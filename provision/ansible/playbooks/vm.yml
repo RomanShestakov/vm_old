@@ -3,8 +3,9 @@
   hosts: all
   roles:
     - { role: common, tags: ["common"] }
-    - { role: python, tags: ["python"] }
+    - { role: ANXS.git, sudo: yes, tags: ["git"] }
     - { role: ANXS.erlang, sudo: yes, tags: ["erlang"] }
+    - { role: ANXS.python, sudo: yes, tags: ["python"] }
     - { role: emacs, tags: ["emacs"] }
     - { role: bash, tags: ["bash"] }
     - { role: ANXS.postgresql, sudo: yes, tags: ["postgresql"] }
