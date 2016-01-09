@@ -23,6 +23,8 @@
   version: "v1.0.1"
   name: ANXS.python
 
+- src: git+https://github.com/trinitronx/ansible-role-tmux.git
+  name: trinitronx.ansible-role-tmux
+
 - src: git+https://github.com/RomanShestakov/ansible-role-emacs.git
-  #version: "v1.0.1"
   name: RomanShestakov.ansible-role-emacs
