@@ -16,7 +16,7 @@
   name: RomanShestakov.erlang
 
 - src: git+https://github.com/ANXS/postgresql.git
-  version: "v1.1.1"
+  #version: "v1.1.1"
   name: ANXS.postgresql
 
 - src: git+https://github.com/ANXS/python.git
