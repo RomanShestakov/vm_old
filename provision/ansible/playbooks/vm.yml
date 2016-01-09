@@ -1,3 +1,4 @@
+# vm.yml - play to install a VM
 
 - name: vm.yml
   hosts: all
@@ -6,6 +7,9 @@
     - { role: ANXS.git, sudo: yes, tags: ["git"] }
     - { role: ANXS.erlang, sudo: yes, tags: ["erlang"] }
     - { role: ANXS.python, sudo: yes, tags: ["python"] }
-    - { role: emacs, tags: ["emacs"] }
+    - { role: RomanShestakov.ansible-role-emacs, sudo: yes, tags: ["emacs"] }
     - { role: bash, tags: ["bash"] }
     - { role: ANXS.postgresql, sudo: yes, tags: ["postgresql"] }
+  tasks:
+  - name: .EMACS | get .emacs git repository
+    git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes

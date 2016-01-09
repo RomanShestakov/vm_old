@@ -22,3 +22,7 @@
 - src: git+https://github.com/ANXS/python.git
   version: "v1.0.1"
   name: ANXS.python
+
+- src: git+https://github.com/RomanShestakov/ansible-role-emacs.git
+  #version: "v1.0.1"
+  name: RomanShestakov.ansible-role-emacs
