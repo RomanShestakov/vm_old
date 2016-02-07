@@ -2,6 +2,18 @@
 
 - name: vm.yml
   hosts: all
+
+  pre_tasks:
+    # - name: upgrade packages
+    #   apt: upgrade=yes update_cache=yes cache_valid_time=300
+    #   sudo: yes
+    - name: DOTFILES | get dotfiles from git repository
+      git: repo={{ dotfiles_repo_url }} dest="/tmp/dotfiles" accept_hostkey=yes
+      register: dotfiles_downloaded
+      - name: DOTFILES | install dotfiles
+        command: ./bootstrap.sh -f chdir="/tmp/dotfiles"
+        when: dotfiles_downloaded.changed
+
   roles:
     - { role: ANXS.git, sudo: yes, tags: ["git"] }
     - { role: RomanShestakov.erlang, sudo: yes, tags: ["erlang"] }
@@ -9,12 +21,8 @@
     - { role: RomanShestakov.ansible-role-emacs, sudo: yes, tags: ["emacs"] }
     - { role: ANXS.postgresql, sudo: yes, tags: ["postgresql"] }
     - { role: trinitronx.ansible-role-tmux, sudo: yes, tags: ["tmux"] }
-  tasks:
-  - name: .EMACS | get .emacs git repository
-    git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes
-  - name: DOTFILES | get dotfiles from git repository
-    git: repo={{ dotfiles_repo_url }} dest="/tmp/dotfiles" accept_hostkey=yes
-    register: dotfiles_downloaded
-  - name: DOTFILES | install dotfiles
-    command: ./bootstrap.sh -f chdir="/tmp/dotfiles"
-    when: dotfiles_downloaded.changed
+    - { role: nicholsn.miniconda, sudo: yes, tags: ["miniconda"] }
+
+  post_tasks:
+    - name: .EMACS | get .emacs git repository
+      git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes

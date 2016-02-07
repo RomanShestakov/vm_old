@@ -17,7 +17,15 @@ as it has provisioning for some basic development tools, such as emacs, tmux, et
 - emacs.d from https://github.com/RomanShestakov/.emacs.d.git
 
 * Ansible setup
-the directory layout and some of the setup scripts are used from : https://github.com/enginyoyen/ansible-best-practises/
+The directory layout and some of the setup scripts are used from : https://github.com/enginyoyen/ansible-best-practises/
+** The playbook makes use of external roles loaded from Ansible Galaxy
+./provision/ansible/playbooks/roles/roles_requirements.yml allows to
+specify which external roles should be downloaded before playbook is executed.
+
+The external roles are installed with the script
+./provision/ansible/playbooks/extensions/setup/role_update.sh which is
+executed by Vagrantfile
+
 * iterm2 defaults
 iterm2 is a excellent terminal client for OSX but it requires changes
 to the profile to make key shortcuts work correctly for emacs.  The
