@@ -10,9 +10,9 @@
     - name: DOTFILES | get dotfiles from git repository
       git: repo={{ dotfiles_repo_url }} dest="/tmp/dotfiles" accept_hostkey=yes
       register: dotfiles_downloaded
-      - name: DOTFILES | install dotfiles
-        command: ./bootstrap.sh -f chdir="/tmp/dotfiles"
-        when: dotfiles_downloaded.changed
+    - name: DOTFILES | install dotfiles
+      command: ./bootstrap.sh -f chdir="/tmp/dotfiles"
+      when: dotfiles_downloaded.changed
 
   roles:
     - { role: ANXS.git, sudo: yes, tags: ["git"] }
