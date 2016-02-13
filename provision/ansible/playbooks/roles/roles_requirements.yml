@@ -16,7 +16,7 @@
   name: RomanShestakov.erlang
 
 - src: git+https://github.com/ANXS/postgresql.git
-  #version: "v1.1.1"
+  version: "v1.3.0"
   name: ANXS.postgresql
 
 - src: git+https://github.com/nicholsn/ansible-role-miniconda
@@ -31,3 +31,6 @@
 
 - src: git+https://github.com/RomanShestakov/ansible-role-emacs.git
   name: RomanShestakov.ansible-role-emacs
+
+- src: git+https://github.com/UDST/ansible-conda.git
+  name: UDST.ansible-conda

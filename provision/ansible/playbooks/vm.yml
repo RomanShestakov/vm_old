@@ -4,13 +4,7 @@
   hosts: all
 
   pre_tasks:
-    # - name: upgrade packages
-    #   apt: upgrade=yes update_cache=yes cache_valid_time=300
-    #   sudo: yes
-    # - name: Installs git
-    #   sudo: yes
-    #   apt: pkg=git state=installed
-    - name: install some packages
+    - name: install git, tmux
       sudo: true
       apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
       with_items:
@@ -24,14 +18,15 @@
       when: dotfiles_downloaded.changed
 
   roles:
-    #- { role: ANXS.git, sudo: yes, tags: ["git"] }
     - { role: RomanShestakov.erlang, sudo: yes, tags: ["erlang"] }
     - { role: ANXS.python, sudo: yes, tags: ["python"] }
     - { role: RomanShestakov.ansible-role-emacs, sudo: yes, tags: ["emacs"] }
     - { role: ANXS.postgresql, sudo: yes, tags: ["postgresql"] }
-    # - { role: trinitronx.ansible-role-tmux, sudo: yes, tags: ["tmux"] }
     - { role: nicholsn.miniconda, sudo: yes, tags: ["miniconda"], miniconda_home: ~/miniconda }
 
   post_tasks:
     - name: .EMACS | get .emacs git repository
       git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes
+
+    - name: CONDA | install Anaconda
+      conda: name=anaconda

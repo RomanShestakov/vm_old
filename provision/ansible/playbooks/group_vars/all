@@ -2,6 +2,6 @@ erlang_version: "17.3"
 postgresql_version: 9.5
 erlang_build_flags: ""
 emacs_repo_url: "https://github.com/emacs-mirror/emacs.git"
-emacs_version: "emacs-24.4"
+emacs_version: "emacs-24.5"
 dotfiles_repo_url: "https://github.com/RomanShestakov/dotfiles.git"
 dot_emacs_repo_url: "https://github.com/RomanShestakov/.emacs.d.git"
