@@ -3,21 +3,10 @@
 - name: vm.yml
   hosts: all
 
-  pre_tasks:
-    - name: install git, tmux
-      sudo: true
-      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=present
-      with_items:
-      - git
-      - tmux
-    - name: DOTFILES | get dotfiles from git repository
-      git: repo={{ dotfiles_repo_url }} dest="/tmp/dotfiles" accept_hostkey=yes
-      register: dotfiles_downloaded
-    - name: DOTFILES | install dotfiles
-      command: ./bootstrap.sh -f chdir="/tmp/dotfiles"
-      when: dotfiles_downloaded.changed
-
   roles:
+    - { role: ANXS.git, sudo: yes, tags: ["git"] }
+    - { role: RomanShestakov.ansible-role-tmux, sudo: yes, tags: ["tmux"] }
+    - { role: RomanShestakov.ansible-role-dotfiles, tags: ["dotfiles"] }
     - { role: RomanShestakov.erlang, sudo: yes, tags: ["erlang"] }
     - { role: ANXS.python, sudo: yes, tags: ["python"] }
     - { role: RomanShestakov.ansible-role-emacs, sudo: yes, tags: ["emacs"] }
@@ -30,3 +19,6 @@
 
     - name: CONDA | install Anaconda
       conda: name=anaconda
+
+    - name: CONDA | install Jedi
+      conda: name=jedi state=latest

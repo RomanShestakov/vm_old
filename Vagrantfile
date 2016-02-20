@@ -8,6 +8,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 # run shell provision on the host machine to download external roles for Ansible
+# https://github.com/enginyoyen/ansible-best-practises
 system("
     if [ #{ARGV[0]} = 'up' ]; then
         echo 'You are doing vagrant up and can execute your script'

@@ -3,9 +3,9 @@
 # from galaxy
 # - src: yatesr.timezone
 
-# - src: git+https://github.com/ANXS/git.git
-#   version: "v1.0.1"
-#   name: ANXS.git
+- src: git+https://github.com/ANXS/git.git
+  version: "v1.0.1"
+  name: ANXS.git
 
 - src: git+https://github.com/ANXS/build-essential.git
   version: "v1.0.1"
@@ -26,11 +26,14 @@
   version: "v1.0.1"
   name: ANXS.python
 
-# - src: git+https://github.com/trinitronx/ansible-role-tmux.git
-#   name: trinitronx.ansible-role-tmux
+- src: git+https://github.com/trinitronx/ansible-role-tmux.git
+  name: trinitronx.ansible-role-tmux
 
 - src: git+https://github.com/RomanShestakov/ansible-role-emacs.git
   name: RomanShestakov.ansible-role-emacs
 
-- src: git+https://github.com/UDST/ansible-conda.git
-  name: UDST.ansible-conda
+- src: git+https://github.com/RomanShestakov/ansible-role-tmux.git
+  name: RomanShestakov.ansible-role-tmux
+
+- src: git+https://github.com/RomanShestakov/ansible-role-dotfiles.git
+  name: RomanShestakov.ansible-role-dotfiles
