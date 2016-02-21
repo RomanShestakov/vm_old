@@ -186,7 +186,8 @@ def _install_package(
     rc, stdout, stderr = module.run_command(command)
 
     if rc != 0:
-        module.fail_json(msg='failed to install package ' + name)
+        module.fail_json(msg='failed to install package ' + name +
+                         ','.join(command) + stderr)
 
     module.exit_json(
         changed=True, name=name, version=version, stdout=stdout, stderr=stderr)

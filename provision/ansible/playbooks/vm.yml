@@ -8,7 +8,7 @@
     - { role: RomanShestakov.ansible-role-tmux, sudo: yes, tags: ["tmux"] }
     - { role: RomanShestakov.ansible-role-dotfiles, tags: ["dotfiles"] }
     - { role: RomanShestakov.erlang, sudo: yes, tags: ["erlang"] }
-    - { role: ANXS.python, sudo: yes, tags: ["python"] }
+    # - { role: ANXS.python, sudo: yes, tags: ["python"] }
     - { role: RomanShestakov.ansible-role-emacs, sudo: yes, tags: ["emacs"] }
     - { role: ANXS.postgresql, sudo: yes, tags: ["postgresql"] }
     - { role: nicholsn.miniconda, sudo: yes, tags: ["miniconda"], miniconda_home: ~/miniconda }
@@ -22,3 +22,9 @@
 
     - name: CONDA | install Jedi
       conda: name=jedi state=latest
+
+    - name: CONDA | install sexpdata
+      conda: name=sexpdata state=latest channels="https://conda.anaconda.org/auto"
+
+    - name: CONDA | install EPC
+      conda: name=epc state=latest channels="https://conda.anaconda.org/auto"
