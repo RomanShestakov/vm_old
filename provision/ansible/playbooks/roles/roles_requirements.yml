@@ -37,3 +37,6 @@
 
 - src: git+https://github.com/RomanShestakov/ansible-role-dotfiles.git
   name: RomanShestakov.ansible-role-dotfiles
+
+- src: git+https://github.com/RomanShestakov/ansible-role-conda-packages
+  name: RomanShestakov.ansible-role-conda-packages

@@ -8,23 +8,11 @@
     - { role: RomanShestakov.ansible-role-tmux, sudo: yes, tags: ["tmux"] }
     - { role: RomanShestakov.ansible-role-dotfiles, tags: ["dotfiles"] }
     - { role: RomanShestakov.erlang, sudo: yes, tags: ["erlang"] }
-    # - { role: ANXS.python, sudo: yes, tags: ["python"] }
     - { role: RomanShestakov.ansible-role-emacs, sudo: yes, tags: ["emacs"] }
     - { role: ANXS.postgresql, sudo: yes, tags: ["postgresql"] }
     - { role: nicholsn.miniconda, sudo: yes, tags: ["miniconda"], miniconda_home: ~/miniconda }
+    - { role: RomanShestakov.ansible-role-conda-packages, sudo: yes, tags: ["conda"] }
 
   post_tasks:
     - name: .EMACS | get .emacs git repository
       git: repo={{ dot_emacs_repo_url }} dest="/home/vagrant/.emacs.d" accept_hostkey=yes
-
-    - name: CONDA | install Anaconda
-      conda: name=anaconda
-
-    - name: CONDA | install Jedi
-      conda: name=jedi state=latest
-
-    - name: CONDA | install sexpdata
-      conda: name=sexpdata state=latest channels="https://conda.anaconda.org/auto"
-
-    - name: CONDA | install EPC
-      conda: name=epc state=latest channels="https://conda.anaconda.org/auto"
