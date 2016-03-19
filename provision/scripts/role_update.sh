@@ -7,7 +7,8 @@ COLOR_RED='\e[0;31m'
 
 # This current directory.
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-ROOT_DIR=$(cd "$DIR/../../" && pwd)
+echo "Current dir: $(pwd)"
+ROOT_DIR=$(cd "$DIR/../ansible/playbooks" && pwd)
 EXTERNAL_ROLE_DIR="$ROOT_DIR/roles/external"
 ROLES_REQUIREMNTS_FILE="$ROOT_DIR/roles/roles_requirements.yml"
 

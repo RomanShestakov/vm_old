@@ -17,11 +17,6 @@
             "script": "scripts/ansible.sh"
         },
         {
-            "type": "shell",
-            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-            "script": "scripts/ansible_roles.sh"
-        },
-        {
             "type": "ansible-local",
             "playbook_dir": "ansible/playbooks",
             "playbook_file": "ansible/playbooks/base.yml",

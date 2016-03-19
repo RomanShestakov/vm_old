@@ -72,7 +72,8 @@ def _find_conda(module, executable):
         if os.path.isfile(executable):
             return executable
 
-    module.fail_json(msg="could not find conda executable")
+    module.fail_json(
+        msg="could not find conda executable:{}".format(executable))
 
 
 def _add_channels_to_command(command, channels):

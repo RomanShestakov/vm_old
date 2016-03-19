@@ -12,7 +12,7 @@ VAGRANTFILE_API_VERSION = "2"
 system("
     if [ #{ARGV[0]} = 'up' ]; then
         echo 'You are doing vagrant up and can execute your script'
-        ./provision/ansible/playbooks/extensions/setup/role_update.sh
+        ./provision/scripts/role_update.sh
     fi
 ")
 
@@ -37,9 +37,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # run ansible
   config.vm.provision "ansible" do |ansible|
+    ansible.sudo = true
     ansible.verbose = "vvv"
     ansible.playbook = 'provision/ansible/playbooks/full.yml'
-    ansible.sudo = true
     ansible.inventory_path = 'provision/ansible/playbooks/production.ini'
     ansible.host_key_checking = false
   end

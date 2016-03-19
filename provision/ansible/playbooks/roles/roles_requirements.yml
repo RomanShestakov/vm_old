@@ -11,13 +11,13 @@
   version: "v1.0.1"
   name: ANXS.build-essential
 
-# - src: git+https://github.com/RomanShestakov/erlang.git
-#   #version: "v1.1.0"
-#   name: RomanShestakov.erlang
+- src: git+https://github.com/RomanShestakov/erlang.git
+  #version: "v1.1.0"
+  name: RomanShestakov.erlang
 
-- src: git+https://github.com/mtpereira/ansible-erlang.git
-  version: "1.1.0"
-  name: mtpereira.erlang
+# - src: git+https://github.com/mtpereira/ansible-erlang.git
+#   version: "1.1.0"
+#   name: mtpereira.erlang
 
 - src: git+https://github.com/ANXS/postgresql.git
   version: "v1.3.0"
