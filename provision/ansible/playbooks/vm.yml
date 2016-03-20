@@ -4,8 +4,8 @@
   hosts: all
 
   roles:
-    - { role: RomanShestakov.ansible-role-dotfiles, become: yes, tags: ["dotfiles"] }
-    - { role: nicholsn.miniconda, tags: ["miniconda"], miniconda_home: ~/miniconda }
+    - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/vagrant" }
+    - { role: nicholsn.miniconda, tags: ["miniconda"], miniconda_home: '/home/vagrant/miniconda' }
     - { role: RomanShestakov.ansible-role-conda-packages, tags: ["conda"] }
 
   post_tasks:
