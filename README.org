@@ -83,11 +83,11 @@ https://techpunch.co.uk/development/high-availability-image-deployments-in-aws-u
 #+BEGIN_SRC
 # build image with packer
 cd provision
-packer build provision/packer/ubuntu.json
+packer build --only=virtualbox-iso provision/ubuntu.json
 # copy created box to vagrant
 vagrant box add virtualbox-ubuntu1404 builds/virtualbox-ubuntu1404.box --force
 # startup vagrant
-cd ..;vagrant up
+vagrant up
 #+END_SRC
 
 * Some issues

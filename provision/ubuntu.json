@@ -3,30 +3,30 @@
         {
             "type": "shell",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-            "script": "scripts/setup.sh"
+            "script": "provision/scripts/setup.sh"
         },
         {
             "type": "shell",
             "scripts": [
-                "scripts/vagrant.sh"
+                "provision/scripts/vagrant.sh"
             ]
         },
         {
             "type": "shell",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-            "script": "scripts/ansible.sh"
+            "script": "provision/scripts/ansible.sh"
         },
         {
             "type": "ansible-local",
-            "playbook_dir": "ansible/playbooks",
-            "playbook_file": "ansible/playbooks/base.yml",
-            "role_paths": ["ansible/playbooks/roles/external"
+            "playbook_dir": "provision/ansible/playbooks",
+            "playbook_file": "provision/ansible/playbooks/base.yml",
+            "role_paths": ["provision/ansible/playbooks/roles/external"
             ]
         },
         {
             "type": "shell",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-            "script": "scripts/cleanup.sh"
+            "script": "provision/scripts/cleanup.sh"
         }
     ],
   "builders": [
@@ -48,7 +48,7 @@
       "disk_size": 81920,
       "guest_os_type": "Ubuntu_64",
       "headless": true,
-      "http_directory": "http",
+      "http_directory": "provision/http",
       "iso_urls": [
         "iso/ubuntu-14.04.4-server-amd64.iso",
         "http://releases.ubuntu.com/14.04/ubuntu-14.04.4-server-amd64.iso"

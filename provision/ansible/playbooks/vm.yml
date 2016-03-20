@@ -4,13 +4,7 @@
   hosts: all
 
   roles:
-    # - { role: ANXS.build-essential, sudo: yes, tags: ["build-essensial"] }
-    # - { role: ANXS.git, sudo: yes, tags: ["git"] }
-    # - { role: RomanShestakov.ansible-role-tmux, tags: ["tmux"] }
     - { role: RomanShestakov.ansible-role-dotfiles, become: yes, tags: ["dotfiles"] }
-    # - { role: RomanShestakov.erlang, sudo: yes, tags: ["erlang"] }
-    # - { role: RomanShestakov.ansible-role-emacs, tags: ["emacs"] }
-    # - { role: ANXS.postgresql, sudo: yes, tags: ["postgresql"] }
     - { role: nicholsn.miniconda, tags: ["miniconda"], miniconda_home: ~/miniconda }
     - { role: RomanShestakov.ansible-role-conda-packages, tags: ["conda"] }
 
