@@ -1,17 +1,15 @@
-# full.yml - play to install a VM
+# experiment.yml - play to install a VM
 
-- name: full.yml
+- name: experiment.yml
   hosts: all
 
   roles:
-    # - { role: ANXS.git, sudo: yes, tags: ["git"] }
     - { role: geerlingguy.git, become: yes, tags: ["git"] }
     - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/vagrant" }
-    - { role: RomanShestakov.ansible-role-tmux, sudo: yes, tags: ["tmux"] }
-    - { role: RomanShestakov.erlang, sudo: yes, tags: ["erlang"] }
-    # - { role: mtpereira.erlang, become: yes, tags: ["erlang"] }
-    - { role: RomanShestakov.ansible-role-emacs, sudo: yes, tags: ["emacs"] }
-    # # - { role: ANXS.postgresql, sudo: yes, tags: ["postgresql"] }
+    - { role: RomanShestakov.ansible-role-tmux, become: yes, tags: ["tmux"] }
+    - { role: RomanShestakov.erlang, become: yes, tags: ["erlang"] }
+    - { role: RomanShestakov.ansible-role-emacs, become: yes, tags: ["emacs"] }
+    # # - { role: ANXS.postgresql, become: yes, tags: ["postgresql"] }
     - { role: nicholsn.miniconda, tags: ["miniconda"], miniconda_home: '/home/vagrant/miniconda' }
     - { role: RomanShestakov.ansible-role-conda-packages }
 
