@@ -22,8 +22,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  #config.vm.box = "precise64"
-  config.vm.box = "virtualbox-ubuntu1404"
+  # config.vm.box = "centos/7"
+  # config.vm.box = "precise64"
+  # config.vm.box = "virtualbox-ubuntu1404"
+  config.vm.box = "virtualbox-centos7"
   config.vm.hostname = "base.local"
   config.vm.network :private_network, ip: "192.168.111.222"
   config.vm.network "forwarded_port", guest: 80, host: 8080
@@ -39,9 +41,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.sudo = true
     ansible.verbose = "vvv"
+    # ansible.playbook = 'provision/ansible/playbooks/full.yml'
     ansible.playbook = 'provision/ansible/playbooks/vm.yml'
-    #ansible.playbook = 'provision/ansible/playbooks/full.yml'
-    #ansible.inventory_path = 'provision/ansible/playbooks/production.ini'
+    # ansible.playbook = 'provision/ansible/playbooks/experiment.yml'
+    ansible.inventory_path = 'provision/ansible/playbooks/production.ini'
     ansible.host_key_checking = false
   end
 end

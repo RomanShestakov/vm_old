@@ -4,8 +4,8 @@
   hosts: all
 
   roles:
-    - { role: ANXS.git, sudo: yes, tags: ["git"] }
-    - { role: ANXS.build-essential, sudo: yes, tags: ["build-essensial"] }
-    - { role: RomanShestakov.ansible-role-tmux, sudo: yes, tags: ["tmux"] }
-    - { role: RomanShestakov.erlang, sudo: yes, tags: ["erlang"] }
-    - { role: RomanShestakov.ansible-role-emacs, sudo: yes, tags: ["emacs"] }
+    - { role: geerlingguy.git, become: yes, tags: ["git"] }
+    - { role: ANXS.build-essential, become: yes, tags: ["build-essensial"] }
+    - { role: RomanShestakov.ansible-role-tmux, become: yes, tags: ["tmux"] }
+    - { role: RomanShestakov.erlang, become: yes, tags: ["erlang"] }
+    - { role: RomanShestakov.ansible-role-emacs, become: yes, tags: ["emacs"] }

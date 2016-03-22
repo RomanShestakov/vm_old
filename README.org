@@ -86,6 +86,11 @@ cd provision
 packer build --only=virtualbox-iso provision/ubuntu.json
 # copy created box to vagrant
 vagrant box add virtualbox-ubuntu1404 builds/virtualbox-ubuntu1404.box --force
+
+# build centos7 image:
+packer build --only=virtualbox-iso provision/centos7.json
+vagrant box add virtualbox-centos7 builds/virtualbox-centos7.box --force
+
 # startup vagrant
 vagrant up
 #+END_SRC
