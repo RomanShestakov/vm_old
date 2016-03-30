@@ -42,7 +42,7 @@ also sources .path, .bash_prompt, .exports, .aliases, .functions,
 .extra.
 [[http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html][Here]] is the good explanation of bash login scripts
 
-* How to create a base box:
+* How to create a base box
 https://scotch.io/tutorials/how-to-create-a-vagrant-base-box-from-an-existing-one
 
 - check vm from github and provision it
@@ -72,25 +72,21 @@ vagrant init vmbox
 #+END_SRC
 * Conda
 * Packer
-http://www.jeffgeerling.com/blog/server-vm-images-ansible-and-packer
-https://github.com/geerlingguy/packer-ubuntu-1404
-https://featheredtoast.wordpress.com/2013/10/14/vagrant-packer-ansible-arch-linux-virtualization-made-in-heaven/
-http://elasticdog.com/2013/08/developing-ansible-playbooks-for-arch-linux-with-vagrant/
-http://superuser.com/questions/745881/how-to-authenticate-to-a-vm-using-vagrant-up
-https://blog.engineyard.com/2014/building-a-vagrant-box
-https://techpunch.co.uk/development/high-availability-image-deployments-in-aws-using-ansible-and-packer
+Packer allows to build a vm image which could be used with most of the
+cloud providers and also with Vagrant.
 
 #+BEGIN_SRC
-# build image with packer
-cd provision
+# build ubuntu image:
 packer build --only=virtualbox-iso provision/ubuntu.json
 # copy created box to vagrant
 vagrant box add virtualbox-ubuntu1404 builds/virtualbox-ubuntu1404.box --force
+#+END_SRC
 
+#+BEGIN_SRC
 # build centos7 image:
 packer build --only=virtualbox-iso provision/centos7.json
+# copy created box to vagrant
 vagrant box add virtualbox-centos7 builds/virtualbox-centos7.box --force
-
 # startup vagrant
 vagrant up
 #+END_SRC
@@ -101,3 +97,11 @@ to fix:
 #+BEGIN_SRC
 vagrant plugin install vagrant-vbguest
 #+END_SRC
+* Some References
+http://www.jeffgeerling.com/blog/server-vm-images-ansible-and-packer
+https://github.com/geerlingguy/packer-ubuntu-1404
+https://featheredtoast.wordpress.com/2013/10/14/vagrant-packer-ansible-arch-linux-virtualization-made-in-heaven/
+http://elasticdog.com/2013/08/developing-ansible-playbooks-for-arch-linux-with-vagrant/
+http://superuser.com/questions/745881/how-to-authenticate-to-a-vm-using-vagrant-up
+https://blog.engineyard.com/2014/building-a-vagrant-box
+https://techpunch.co.uk/development/high-availability-image-deployments-in-aws-using-ansible-and-packer
