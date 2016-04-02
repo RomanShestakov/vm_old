@@ -27,7 +27,7 @@
   version: "v1.3.0"
   name: ANXS.postgresql
 
-- src: git+https://github.com/nicholsn/ansible-role-miniconda
+- src: git+https://github.com/RomanShestakov/ansible-role-miniconda.git
   name: nicholsn.miniconda
 
 - src: git+https://github.com/ANXS/python.git
