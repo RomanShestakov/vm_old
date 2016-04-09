@@ -71,6 +71,7 @@ config.vm.box = "vmbox"
 vagrant init vmbox
 #+END_SRC
 * Conda
+conda install -c https://conda.anaconda.org/raspberrypi anaconda
 * Packer
 Packer allows to build a vm image which could be used with most of the
 cloud providers and also with Vagrant.
@@ -91,6 +92,39 @@ vagrant box add virtualbox-centos7 builds/virtualbox-centos7.box --force
 vagrant up
 #+END_SRC
 
+* Raspberry Pi
+** how to build the image
+cd /Users/romanshestakov/Downloads
+diskutil unmountDisk /dev/disk2
+sudo dd bs=1m if=2016-03-18-raspbian-jessie.img of=/dev/disk2
+ssh pi@192.168.1.82
+ssh pi@192.168.1.83
+ssh pi@192.168.1.84
+
+** run network setup:
+ansible-playbook -i provision/ansible/playbooks/roles/internal/pi_setup/networking/inventory provision/ansible/playbooks/roles/internal/pi_setup/networking/main.yml -k
+
+** how to setup wifi
+/etc/wpa_supplicant/wpa_supplicant.conf
+network={
+   ssid="BTHub5-HFQX2"
+   psk="2aeced3525"
+}
+** how to connect
+user: pi
+password: raspberry
+** how to add more space:
+sudo raspi-config
+** how to reconfigure locales
+sudo dpkg-reconfigure locales
+(add en_US.UTF-8 UTF-8)
+** change host name from 'raspberrypi' in the files:
+sudo vi /etc/hosts
+sudo vi /etc/hostname
+sudo /etc/init.d/hostname.sh
+sudo reboot
+# to run ansible book
+ansible-playbook provision/ansible/playbooks/raspberry.yml -i provision/ansible/playbooks/production.ini --ask-pass --sudo -c paramiko
 * Some issues
 ** 'vagrant up' fails with 'mount: unknown filesystem type 'vboxsf''
 to fix:
@@ -105,3 +139,7 @@ http://elasticdog.com/2013/08/developing-ansible-playbooks-for-arch-linux-with-v
 http://superuser.com/questions/745881/how-to-authenticate-to-a-vm-using-vagrant-up
 https://blog.engineyard.com/2014/building-a-vagrant-box
 https://techpunch.co.uk/development/high-availability-image-deployments-in-aws-using-ansible-and-packer
+http://raspberrypg.org/2015/06/step-5-update-installing-postgresql-on-my-raspberry-pi-1-and-2/
+http://www.pidramble.com/wiki/hardware/rgb-led-gpio
+http://www.rs-online.com/designspark/electronics/blog/ten-essential-raspberry-pi-projects
+https://howtotec.net/raspberrypi/raspberry-pi-projects-best-cool-projects-for-your-raspberry-pi-b-2

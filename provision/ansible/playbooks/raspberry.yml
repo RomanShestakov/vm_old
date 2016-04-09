@@ -1,6 +1,6 @@
-# experiment.yml - play to install a VM
+# raspberry.yml - play to install a raspberry
 
-- name: experiment.yml
+- name: raspberry.yml
   hosts: pi
   remote_user: pi
   sudo: yes
@@ -11,7 +11,7 @@
     - { role: RomanShestakov.ansible-role-tmux, become: yes, tags: ["tmux"] }
     - { role: RomanShestakov.erlang, become: yes, tags: ["erlang"] }
     - { role: RomanShestakov.ansible-role-emacs, become: yes, tags: ["emacs"] }
-    - { role: ANXS.postgresql, sudo: true, tags: ["postgresql"] }
+    - { role: ANXS.postgresql, become: yes, postgresql_apt_repository: 'deb-src http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi', tags: ["postgresql"] }
     - { role: nicholsn.miniconda, tags: ["miniconda"], miniconda_home: '/home/pi/miniconda',
     url: "http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-armv7l.sh" }
     #url: "http://repo.continuum.io/miniconda/Miniconda-3.5.5-Linux-armv6l.sh" }
