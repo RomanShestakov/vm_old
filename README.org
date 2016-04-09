@@ -143,3 +143,6 @@ http://raspberrypg.org/2015/06/step-5-update-installing-postgresql-on-my-raspber
 http://www.pidramble.com/wiki/hardware/rgb-led-gpio
 http://www.rs-online.com/designspark/electronics/blog/ten-essential-raspberry-pi-projects
 https://howtotec.net/raspberrypi/raspberry-pi-projects-best-cool-projects-for-your-raspberry-pi-b-2
+
+ssid: "BTHub5-HFQX2"
+psk: "2aeced3525"

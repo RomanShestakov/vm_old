@@ -48,3 +48,9 @@
 
 - src: git+https://github.com/RomanShestakov/ansible-role-conda-packages
   name: RomanShestakov.ansible-role-conda-packages
+
+- src: git+https://github.com/RomanShestakov/ansible-raspi-config.git
+  name: mikolak.raspi-config
+
+- src: git+https://github.com/RomanShestakov/ansible-role-pi-setup.git
+  name: RomanShestakov.ansible-role-pi-setup
