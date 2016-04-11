@@ -1,11 +1,12 @@
 # raspberry.yml - play to install a raspberry
 
 - name: raspberry.yml
-  hosts: pi
+  hosts: pis
   remote_user: pi
   sudo: yes
 
   roles:
+    - { role: RomanShestakov.ansible-role-pi-setup, become: yes }
     - { role: geerlingguy.git, become: yes, tags: ["git"] }
     - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/pi" }
     - { role: RomanShestakov.ansible-role-tmux, become: yes, tags: ["tmux"] }

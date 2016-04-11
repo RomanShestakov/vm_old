@@ -96,7 +96,8 @@ vagrant up
 ** how to build the image
 cd /Users/romanshestakov/Downloads
 diskutil unmountDisk /dev/disk2
-sudo dd bs=1m if=2016-03-18-raspbian-jessie.img of=/dev/disk2
+#sudo dd bs=1m if=2016-03-18-raspbian-jessie.img of=/dev/disk2
+sudo dd bs=1m if=2016-03-18-raspbian-jessie-lite.img of=/dev/disk2
 ssh pi@192.168.1.82
 ssh pi@192.168.1.83
 ssh pi@192.168.1.84
@@ -124,7 +125,9 @@ sudo vi /etc/hostname
 sudo /etc/init.d/hostname.sh
 sudo reboot
 # to run ansible book
-ansible-playbook provision/ansible/playbooks/raspberry.yml -i provision/ansible/playbooks/production.ini --ask-pass --sudo -c paramiko
+# ansible-playbook provision/ansible/playbooks/raspberry.yml -i provision/ansible/playbooks/production.ini --ask-pass --sudo -c paramiko
+ansible-playbook provision/ansible/playbooks/raspberry.yml -i provision/ansible/playbooks/production.ini --ask-pass --sudo -c paramiko --limit all[0-2]
+
 * Some issues
 ** 'vagrant up' fails with 'mount: unknown filesystem type 'vboxsf''
 to fix:

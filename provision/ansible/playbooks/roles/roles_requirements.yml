@@ -54,3 +54,12 @@
 
 - src: git+https://github.com/RomanShestakov/ansible-role-pi-setup.git
   name: RomanShestakov.ansible-role-pi-setup
+
+- src: git+https://github.com/knopki/ansible-locale.git
+  name: knopki.locale
+
+- src: git+https://github.com/Stouts/Stouts.timezone.git
+  name: Stouts.timezone
+
+- src: git+https://github.com/Stouts/Stouts.hostname.git
+  name: Stouts.hostname
