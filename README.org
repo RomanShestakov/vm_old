@@ -105,7 +105,7 @@ ssh pi@192.168.1.84
 ** run network setup:
 ansible-playbook -i provision/ansible/playbooks/roles/internal/pi_setup/networking/inventory provision/ansible/playbooks/roles/internal/pi_setup/networking/main.yml -k
 
-** how to setup wifi
+** TODO how to setup wifi
 /etc/wpa_supplicant/wpa_supplicant.conf
 network={
    ssid="BTHub5-HFQX2"
