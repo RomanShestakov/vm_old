@@ -6,7 +6,7 @@
   sudo: yes
 
   roles:
-    - { role: RomanShestakov.ansible-role-pi-setup, become: yes }
+    # - { role: RomanShestakov.ansible-role-pi-setup, become: yes }
     - { role: geerlingguy.git, become: yes, tags: ["git"] }
     - { role: RomanShestakov.ansible-role-dotfiles, dotfiles_dest: "/home/pi" }
     - { role: RomanShestakov.ansible-role-tmux, become: yes, tags: ["tmux"] }
@@ -21,3 +21,6 @@
     - name: .EMACS | get .emacs git repository
       git: repo={{ dot_emacs_repo_url }} dest="/home/pi/.emacs.d" accept_hostkey=yes
       sudo: False
+    - name: mount QNAP NFS
+      action: mount name=/opt/dev src={{ nfs }}:/Dev fstype=nfs opts=nolock state=mounted
+      sudo: yes

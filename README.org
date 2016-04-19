@@ -103,7 +103,8 @@ ssh pi@192.168.1.83
 ssh pi@192.168.1.84
 
 ** run network setup:
-ansible-playbook -i provision/ansible/playbooks/roles/internal/pi_setup/networking/inventory provision/ansible/playbooks/roles/internal/pi_setup/networking/main.yml -k
+# ansible-playbook -i provision/ansible/playbooks/roles/internal/pi_setup/networking/inventory provision/ansible/playbooks/roles/internal/pi_setup/networking/main.yml -k
+ansible-playbook provision/ansible/playbooks/raspberry_init.yml -i provision/ansible/playbooks/pi_inventory --extra-vars="ssid=BTHub5-HFQX2 psk=2aeced3525" --ask-pass --sudo -c paramiko
 
 ** TODO how to setup wifi
 /etc/wpa_supplicant/wpa_supplicant.conf
